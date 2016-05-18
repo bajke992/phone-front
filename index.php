@@ -29,7 +29,7 @@
 
 			.btn {
 				color: white;
-				width: 44%;
+				width: 50%;
 				height: 28px;
 				font-size: 16px;
 				border: none;
@@ -37,12 +37,12 @@
 			}
 
 			.btn.answer {
-				margin-right: 5%;
+				/*margin-right: 5%;*/
 				background-color: #8BFC19;
 			}
 
 			.btn.decline {
-				margin-left: 5%;
+				/*margin-left: 5%;*/
 				background-color: #FC1919;
 			}
 
