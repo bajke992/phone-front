@@ -132,6 +132,8 @@
 		<script>
 			Pusher.logToConsole = true
 
+			var callData = null;
+
 			var pusher = new Pusher('29752e0e135325d56ed5', {
 				cluster: 'eu',
 				encrypted: true
@@ -140,13 +142,36 @@
 			var channel = pusher.subscribe('test');
 
 			channel.bind("App\\Events\\IncomingCallEvent", function(data) {
-				console.log(data.data);
+				callData = data;
 				createCallNotification(data.data);
 			});
 
-			channel.bind("", function (data) {
-
+			channel.bind("App\\Events\\ActiveCallEvent", function(data) {
+				console.log(data);
+				createActiveCallNotification(data.data);
 			});
+
+			$(document).ready(function () {
+				performAction('active-call?ext=104', function (data) {
+					console.log(data);
+				});
+			});
+
+			function createActiveCallNotification(data) {
+				$('#notifications').append(
+					$('<div />').attr({ id: data.MACAddress, 'class': 'notification' }).css({ display: 'none' }).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyName)
+					).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
+					).append(
+						$('<div />').attr({ 'class' : 'actionBtns'}).append(
+							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
+						)
+					)
+				);
+
+				$('#' + data.MACAddress).fadeIn(500);
+			}
 
 			function createCallNotification (data) {
 				$('#notifications').append(
@@ -156,10 +181,8 @@
 						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
 					).append(
 						$('<div />').attr({ 'class' : 'actionBtns'}).append(
-							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
-						)//.append(
-							//$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall("' + data.MACAddress + '");' }).text('Decline')
-						//)
+							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
+						)
 					)
 				);
 
@@ -173,7 +196,7 @@
 					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
 				);
 
-				performAction('answer-call');
+				performAction('answer-call?ext=104&' + JSON.strigify(callData));
 			}
 
 			// function declineCall (callId) {
@@ -195,13 +218,12 @@
 				performAction('place-call?number=' + $('#number').val());
 			}
 
-			function performAction(action) {
+			function performAction(action, callback) {
+				callback = (typeof callback === 'undefined') ? function(data){ console.log(data); } : callback;
 				$.ajax({
 					type: "GET",
 					url: 'http://159.203.102.189:3000/' + action,
-					success: function (data) {
-						console.log(data);
-					}
+					success: callback
 				});
 			}
 		</script>
