@@ -219,14 +219,12 @@
 				performAction('place-call?number=' + $('#number').val());
 			}
 
-			function performAction(action) {
-				// callback = (typeof callback === 'undefined') ? function(data){ console.log(data); } : callback;
+			function performAction(action, callback) {
+				callback = (typeof callback === 'undefined') ? function(data){ console.log(data); } : callback;
 				$.ajax({
 					type: "GET",
 					url: 'http://159.203.102.189:3000/' + action,
-					success: function (data) {
-						console.log(data)
-					}
+					success: callback
 				});
 			}
 		</script>
