@@ -23,6 +23,10 @@
 				padding: 3px;
 			}
 
+			.actionBtns {
+				text-align: center;
+			}
+
 			.btn {
 				color: white;
 				width: 44%;
@@ -39,6 +43,10 @@
 
 			.btn.decline {
 				margin-left: 5%;
+				background-color: #FC1919;
+			}
+
+			.btn.endCall {
 				background-color: #FC1919;
 			}
 
@@ -149,9 +157,9 @@
 					).append(
 						$('<div />').attr({ 'class' : 'actionBtns'}).append(
 							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
-						).append(
-							$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall("' + data.MACAddress + '");' }).text('Decline')
-						)
+						)//.append(
+							//$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall("' + data.MACAddress + '");' }).text('Decline')
+						//)
 					)
 				);
 
@@ -162,21 +170,21 @@
 				// $('#' + callId).fadeOut(500, function () { this.remove(); });
 				$('#' + callId + ' .actionBtns').children().remove()
 				$('#' + callId + ' .actionBtns').append(
-					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' })
+					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
 				);
 
-
-				// performAction('answer-call');
+				performAction('answer-call');
 			}
 
-			function declineCall (callId) {
-				$('#' + callId).fadeOut(500, function () { this.remove(); });
+			// function declineCall (callId) {
+			// 	$('#' + callId).fadeOut(500, function () { this.remove(); });
 
-				performAction('decline-call')
-			}
+			// 	performAction('decline-call');
+			// }
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
+				performAction('end-call');
 			}
 
 			function doClick(item){
