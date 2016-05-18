@@ -93,6 +93,8 @@
 
 			function declineCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
+
+				performAction('decline-call')
 			}
 
 			function endCall (callId) {
