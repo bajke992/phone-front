@@ -157,7 +157,7 @@
 				// });
 			// });
 
-			function createActiveCallNotification(data) {
+			function createCallNotification(data) {
 				$('#notifications').append(
 					$('<div />').attr({ id: data.MACAddress, 'class': 'notification' }).css({ display: 'none' }).append(
 						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyName)
@@ -166,22 +166,6 @@
 					).append(
 						$('<div />').attr({ 'class' : 'actionBtns'}).append(
 							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
-						)
-					)
-				);
-
-				$('#' + data.MACAddress).fadeIn(500);
-			}
-
-			function createCallNotification (data) {
-				$('#notifications').append(
-					$('<div />').attr({ id: data.MACAddress, 'class': 'notification' }).css({ display: 'none' }).append(
-						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyName)
-					).append(
-						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
-					).append(
-						$('<div />').attr({ 'class' : 'actionBtns'}).append(
-							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + data.MACAddress + '");' }).text('End Call')
 						)
 					)
 				);
@@ -224,7 +208,7 @@
 					type: "GET",
 					url: 'http://159.203.102.189:3000/' + action,
 					success: function (data) {
-						console.log(data);
+						console.log(data)
 					}
 				});
 			}
