@@ -179,7 +179,7 @@
 			}
 
 			function placeCall () {
-				performAction('place-call?number' + $('#number').val());
+				performAction('place-call?number=' + $('#number').val());
 			}
 
 			function performAction(action) {
