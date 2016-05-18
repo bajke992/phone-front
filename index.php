@@ -37,12 +37,10 @@
 			}
 
 			.btn.answer {
-				/*margin-right: 5%;*/
 				background-color: #8BFC19;
 			}
 
 			.btn.decline {
-				/*margin-left: 5%;*/
 				background-color: #FC1919;
 			}
 
@@ -57,9 +55,6 @@
 
 			.dialpad #number {
 			    width: 79%;
-			    /*margin: 0px;*/
-			    /*padding: 0px;*/
-			    /*float: left;*/
 
 			    height: 38px;
 			    font-size: 24px;
@@ -71,9 +66,6 @@
 
 			.dialpad .call {
 				width: 19%;
-			    /*margin: 0px;*/
-			    /*padding: 0px;*/
-			    /*float: right;*/
 			    height: 40px;
 			    font-size: 20px;
 
@@ -153,7 +145,7 @@
 
 			$(document).ready(function () {
 				performAction('active-call?ext=104', function (data) {
-					console.log(data);
+					callData = data;
 					createActiveCallNotification(data);
 				});
 			});
@@ -199,12 +191,6 @@
 
 				performAction('answer-call');
 			}
-
-			// function declineCall (callId) {
-			// 	$('#' + callId).fadeOut(500, function () { this.remove(); });
-
-			// 	performAction('decline-call');
-			// }
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
