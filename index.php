@@ -8,7 +8,7 @@
 			}
 
 			.notification {
-				width: 160px;
+				width: 220px;
 				height: auto;
 				background: #0085CC;
 				border-radius: 15px;
