@@ -132,7 +132,7 @@
 			var channel = pusher.subscribe('test');
 
 			channel.bind("App\\Events\\IncomingCallEvent", function(data) {
-				// console.log(data.data);
+				console.log(data.data);
 				createCallNotification(data.data);
 			});
 
@@ -147,7 +147,7 @@
 					).append(
 						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
 					).append(
-						$('<div />').append(
+						$('<div />').attr({ 'class' : 'actionBtns'}).append(
 							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
 						).append(
 							$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall("' + data.MACAddress + '");' }).text('Decline')
@@ -159,9 +159,13 @@
 			}
 
 			function answerCall (callId) {
-				$('#' + callId).fadeOut(500, function () { this.remove(); });
+				// $('#' + callId).fadeOut(500, function () { this.remove(); });
+				$('#' + callId + ' .actionBtns').children().remove().append(
+					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' });
+				);
 
-				performAction('answer-call');
+
+				// performAction('answer-call');
 			}
 
 			function declineCall (callId) {
