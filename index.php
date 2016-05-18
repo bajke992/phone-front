@@ -161,7 +161,7 @@
 			function answerCall (callId) {
 				// $('#' + callId).fadeOut(500, function () { this.remove(); });
 				$('#' + callId + ' .actionBtns').children().remove().append(
-					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' });
+					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' })
 				);
 
 
