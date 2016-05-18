@@ -41,9 +41,82 @@
 				margin-left: 5%;
 				background-color: #FC1919;
 			}
+
+			.dialpad{
+				float: left;
+				width: 400px;
+			}
+
+			.dialpad #number {
+			    width: 79%;
+			    /*margin: 0px;*/
+			    /*padding: 0px;*/
+			    /*float: left;*/
+
+			    height: 38px;
+			    font-size: 24px;
+
+			    border-top: none;
+			    border-left: none;
+			    border-right: none;
+			}
+
+			.dialpad .call {
+				width: 19%;
+			    /*margin: 0px;*/
+			    /*padding: 0px;*/
+			    /*float: right;*/
+			    height: 40px;
+			    font-size: 20px;
+
+			    border: none;
+			    margin-left: -2px;
+			}
+
+			.dialpad .row {
+				width: 100%;
+				float: left;
+				text-align: center;
+			}
+
+			.dialpad .row button {
+				width: 50px;
+				height: 50px;
+				border:none;
+				border-radius: 50%;
+				font-size: 20px;
+				margin: 10px 20px;
+			}
 		</style>
 	</head>
 	<body>
+		<div class="dialpad">
+			<div>
+				<input type="text" id="number">
+				<button class="call" onclick="placeCall();">Call</button>
+			</div>
+			<div class="row">
+				<button onclick="doClick(1);">1</button>
+				<button onclick="doClick(2);">2</button>
+				<button onclick="doClick(3);">3</button>
+			</div>
+			<div class="row">
+				<button onclick="doClick(4);">4</button>
+				<button onclick="doClick(5);">5</button>
+				<button onclick="doClick(6);">6</button>
+			</div>
+			<div class="row">
+				<button onclick="doClick(7);">7</button>
+				<button onclick="doClick(8);">8</button>
+				<button onclick="doClick(9);">9</button>
+			</div>
+			<div class="row">
+				<button onclick="doClick('*');">*</button>
+				<button onclick="doClick(0);">0</button>
+				<button onclick="doClick('#');">#</button>
+			</div>
+			
+		</div>
 		<div id="notifications"></div>
 
 		<script src="//js.pusher.com/3.1/pusher.min.js"></script>
@@ -99,6 +172,14 @@
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
+			}
+
+			function doClick(item){
+				$('#number').val($('#number').val() + item);
+			}
+
+			function placeCall () {
+				performAction('place-call?number' + $('#number').val());
 			}
 
 			function performAction(action) {
