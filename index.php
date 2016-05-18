@@ -146,16 +146,16 @@
 				createCallNotification(data.data);
 			});
 
-			channel.bind("App\\Events\\ActiveCallEvent", function(data) {
-				console.log(data);
-				createActiveCallNotification(data.data);
-			});
+			// channel.bind("App\\Events\\ActiveCallEvent", function(data) {
+			// 	console.log(data);
+			// 	createActiveCallNotification(data.data);
+			// });
 
-			$(document).ready(function () {
-				performAction('active-call?ext=104', function (data) {
-					console.log(data);
-				});
-			});
+			// $(document).ready(function () {
+				// performAction('active-call?ext=104', function (data) {
+					// console.log(data);
+				// });
+			// });
 
 			function createActiveCallNotification(data) {
 				$('#notifications').append(
@@ -196,7 +196,7 @@
 					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
 				);
 
-				performAction('answer-call?ext=104&' + JSON.strigify(callData));
+				performAction('answer-call');
 			}
 
 			// function declineCall (callId) {
@@ -218,12 +218,14 @@
 				performAction('place-call?number=' + $('#number').val());
 			}
 
-			function performAction(action, callback) {
-				callback = (typeof callback === 'undefined') ? function(data){ console.log(data); } : callback;
+			function performAction(action) {
+				// callback = (typeof callback === 'undefined') ? function(data){ console.log(data); } : callback;
 				$.ajax({
 					type: "GET",
 					url: 'http://159.203.102.189:3000/' + action,
-					success: callback
+					success: function (data) {
+						console.log(data);
+					}
 				});
 			}
 		</script>
