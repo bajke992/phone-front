@@ -208,7 +208,7 @@
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
-				performAction('end-call');
+				performAction('end-call?ext=104');
 			}
 
 			function doClick(item){
