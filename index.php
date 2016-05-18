@@ -151,11 +151,12 @@
 			// 	createActiveCallNotification(data.data);
 			// });
 
-			// $(document).ready(function () {
-				// performAction('active-call?ext=104', function (data) {
-					// console.log(data);
-				// });
-			// });
+			$(document).ready(function () {
+				performAction('active-call?ext=104', function (data) {
+					console.log(data);
+					createActiveCallNotification(data.data);
+				});
+			});
 
 			function createCallNotification(data) {
 				$('#notifications').append(
@@ -166,6 +167,22 @@
 					).append(
 						$('<div />').attr({ 'class' : 'actionBtns'}).append(
 							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
+						)
+					)
+				);
+
+				$('#' + data.MACAddress).fadeIn(500);
+			}
+
+			function createActiveCallNotification(data) {
+				$('#notifications').append(
+					$('<div />').attr({ id: data.MACAddress, 'class': 'notification' }).css({ display: 'none' }).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyName)
+					).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
+					).append(
+						$('<div />').attr({ 'class' : 'actionBtns'}).append(
+							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + data.MACAddress + '");' }).text('End Call')
 						)
 					)
 				);
