@@ -59,8 +59,8 @@
 			var channel = pusher.subscribe('test');
 
 			channel.bind("App\\Events\\IncomingCallEvent", function(data) {
-				console.log(data.data);
-				// createCallNotification(data.data);
+				// console.log(data.data);
+				createCallNotification(data.data);
 			});
 
 			channel.bind("", function (data) {
