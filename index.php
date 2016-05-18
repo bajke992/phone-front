@@ -88,6 +88,7 @@
 			function answerCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
 
+				performAction('answer-call');
 			}
 
 			function declineCall (callId) {
@@ -96,6 +97,16 @@
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
+			}
+
+			function performAction(action) {
+				$.ajax({
+					type: "GET",
+					url: 'http://159.203.102.189:3000/' + action,
+					success: function (data) {
+						console.log(data);
+					}
+				});
 			}
 		</script>
 	</body>
