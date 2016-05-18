@@ -154,7 +154,7 @@
 			$(document).ready(function () {
 				performAction('active-call?ext=104', function (data) {
 					console.log(data);
-					createActiveCallNotification(data.data);
+					createActiveCallNotification(data);
 				});
 			});
 
