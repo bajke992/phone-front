@@ -75,9 +75,9 @@
 						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
 					).append(
 						$('<div />').append(
-							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall(' + data.MACAddress + ');' }).text('Answer')
+							$('<button />').attr({ 'class' : 'btn answer', onclick : 'answerCall("' + data.MACAddress + '");' }).text('Answer')
 						).append(
-							$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall(' + data.MACAddress + ');' }).text('Decline')
+							$('<button />').attr({ 'class' : 'btn decline', onclick : 'declineCall("' + data.MACAddress + '");' }).text('Decline')
 						)
 					)
 				);
