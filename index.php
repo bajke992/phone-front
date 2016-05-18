@@ -181,7 +181,7 @@
 						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CallingPartyNumber)
 					).append(
 						$('<div />').attr({ 'class' : 'actionBtns'}).append(
-							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
+							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + data.MACAddress + '");' }).text('End Call')
 						)
 					)
 				);
