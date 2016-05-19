@@ -218,10 +218,11 @@
 			}
 
 			function placeCall () {
-				performAction('place-call?number=' + $('#number').val() + '&ext=104', function () {
+				var number = $('#number').val();
+				performAction('place-call?number=' + number + '&ext=104', function () {
 					var data = {
-						CallingPartyName : '',
-						CallingPartyNumber : $('#number').val(),
+						CalledPartyName : 'N/A',
+						CalledPartyNumber : number,
 						MACAddress: Math.floor(Math.random()*9000) + 1000
 					}
 
