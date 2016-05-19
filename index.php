@@ -135,6 +135,7 @@
 
 			channel.bind("App\\Events\\IncomingCallEvent", function(data) {
 				callData = data;
+				console.log(data);
 				createCallNotification(data.data);
 			});
 
@@ -146,7 +147,11 @@
 			$(document).ready(function () {
 				performAction('active-call?ext=104', function (data) {
 					callData = data;
-					createActiveCallNotification(data);
+					if(data.hasOwnProperty('OutgoingCallEvent')) {
+						createActiveOutboundCallNotification(data.OutgoingCallEvent);
+					} else if (data.hasOwnProperty('IncomingCallEvent')) {
+						createActiveCallNotification(data.IncomingCallEvent);
+					}
 				});
 			});
 
