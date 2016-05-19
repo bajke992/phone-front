@@ -125,13 +125,14 @@
 			Pusher.logToConsole = true
 
 			var callData = null;
+			var ext = "<?php echo $_GET['ext']; ?>";
 
 			var pusher = new Pusher('29752e0e135325d56ed5', {
 				cluster: 'eu',
 				encrypted: true
 			});
 
-			var channel = pusher.subscribe('test');
+			var channel = pusher.subscribe(ext);
 
 			channel.bind("App\\Events\\IncomingCallEvent", function(data) {
 				callData = data;
@@ -145,7 +146,7 @@
 			// });
 
 			$(document).ready(function () {
-				performAction('active-call?ext=104', function (data) {
+				performAction('active-call?ext=' + ext, function (data) {
 					callData = data;
 					if(data.hasOwnProperty('OutgoingCallEvent')) {
 						createActiveOutboundCallNotification(data.OutgoingCallEvent);
@@ -215,7 +216,7 @@
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
-				performAction('end-call?ext=104');
+				performAction('end-call?ext=' + ext);
 			}
 
 			function doClick(item){
@@ -224,7 +225,7 @@
 
 			function placeCall () {
 				var number = $('#number').val();
-				performAction('place-call?number=' + number + '&ext=104', function () {
+				performAction('place-call?number=' + number + '&ext=' + ext, function () {
 					var data = {
 						CalledPartyName : 'N/A',
 						CalledPartyNumber : number,
