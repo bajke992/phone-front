@@ -182,6 +182,22 @@
 				$('#' + data.MACAddress).fadeIn(500);
 			}
 
+			function createActiveOutboundCallNotification(data) {
+				$('#notifications').append(
+					$('<div />').attr({ id: data.MACAddress, 'class': 'notification' }).css({ display: 'none' }).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CalledPartyName)
+					).append(
+						$('<div />').attr({ 'class' : 'callerInfo' }).text(data.CalledPartyNumber)
+					).append(
+						$('<div />').attr({ 'class' : 'actionBtns'}).append(
+							$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + data.MACAddress + '");' }).text('End Call')
+						)
+					)
+				);
+
+				$('#' + data.MACAddress).fadeIn(500);
+			}
+
 			function answerCall (callId) {
 				// $('#' + callId).fadeOut(500, function () { this.remove(); });
 				$('#' + callId + ' .actionBtns').children().remove()
@@ -202,7 +218,15 @@
 			}
 
 			function placeCall () {
-				performAction('place-call?number=' + $('#number').val());
+				performAction('place-call?number=' + $('#number').val() + '&ext=104', function () {
+					var data = {
+						CallingPartyName : '',
+						CallingPartyNumber : $('#number').val(),
+						MACAddress: Math.floor(Math.random()*9000) + 1000
+					}
+
+					createActiveOutboundCallNotification(data);
+				});
 			}
 
 			function performAction(action, callback) {
