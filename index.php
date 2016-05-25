@@ -146,7 +146,7 @@
 			// });
 
 			$(document).ready(function () {
-				performAction('active-call?ext=' + ext, function (data) {
+				performAction('phone/active-call?ext=' + ext, function (data) {
 					callData = data;
 					if(data.hasOwnProperty('OutgoingCallEvent')) {
 						createActiveOutboundCallNotification(data.OutgoingCallEvent);
@@ -216,7 +216,7 @@
 
 			function endCall (callId) {
 				$('#' + callId).fadeOut(500, function () { this.remove(); });
-				performAction('end-call?ext=' + ext);
+				performAction('phone/end-call?ext=' + ext);
 			}
 
 			function doClick(item){
@@ -225,7 +225,7 @@
 
 			function placeCall () {
 				var number = $('#number').val();
-				performAction('place-call?number=' + number + '&ext=' + ext, function () {
+				performAction('phone/place-call?number=' + number + '&ext=' + ext, function () {
 					var data = {
 						CalledPartyName : 'N/A',
 						CalledPartyNumber : number,
