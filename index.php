@@ -211,7 +211,7 @@
 					$('<button />').attr({ 'class' : 'btn endCall', onclick : 'endCall("' + callId + '");' }).text('End Call')
 				);
 
-				performAction('phone/answer-call');
+				performAction('phone/answer-call?ext=' + ext);
 			}
 
 			function endCall (callId) {
